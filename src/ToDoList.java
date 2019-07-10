@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ToDoList {
 
@@ -48,5 +49,14 @@ public class ToDoList {
 			if (task.isComplete() == true)
 				completedTasks.add(task);
 		return completedTasks;
+	}
+
+	public Collection<Task> searchTasks(String description) {
+		return taskList.stream().filter(
+				obj -> obj != null && ((obj.getDescription() != null && obj.getDescription().contains(description))
+						|| (obj.getCategory() != null && obj.getCategory().contains(description)
+								|| (obj.getPriority() != null && obj.getPriority().contains(description))
+								|| (obj.getTitle() != null && obj.getTitle().contains(description)))))
+				.collect(Collectors.toList());
 	}
 }
