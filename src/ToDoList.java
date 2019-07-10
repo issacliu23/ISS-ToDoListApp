@@ -15,9 +15,16 @@ public class ToDoList {
 	public boolean addTask(Task task) {
 		return taskList.add(task);
 	}
+	
+	public boolean removeTask(int index) {
+		return removeTask(taskList.get(index-1));
+	}
 
 	public boolean removeTask(Task task) {
-		return taskList.remove(task);
+		if(task != null) 
+			return taskList.remove(task);
+		else 
+			return false;
 	}
 
 	public void completeTask(Task task) {
