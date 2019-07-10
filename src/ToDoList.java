@@ -5,12 +5,7 @@ import java.util.stream.Collectors;
 
 public class ToDoList {
 
-//	private HashMap<String, Task> tasks = new HashMap<String, Task>();
 	private List<Task> taskList = new ArrayList<Task>();
-
-	public static void main(String[] args) {
-
-	}
 
 	public boolean addTask(Task task) {
 		return taskList.add(task);
