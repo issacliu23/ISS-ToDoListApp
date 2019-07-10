@@ -1,5 +1,6 @@
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class Main {
@@ -56,6 +57,45 @@ public class Main {
 		System.out.print("Your action: ");
 	}
 
+	public static void searchList(Collection<Task> list) {
+		int index = 0;
+		// header
+
+		System.out.println("**********************************************************");
+		System.out.println("**                     Wow Todo List                    **");
+		System.out.println("**********************************************************");
+
+		// body
+		if(list.isEmpty()){
+			System.out.println("");
+			System.out.println("");
+			System.out.println("                   NO SEARCH RESULT                   ");
+			System.out.println("");
+			System.out.println("");
+		} else{
+			System.out.println("*********************  Search Result  ********************");
+			for (Task task : list) {
+				System.out.println("");
+				System.out.println(" S/N         : " + String.valueOf(index + 1));
+				System.out.println(" title       : " + task.getTitle());
+				System.out.println(" description : " + task.getDescription());
+				System.out.println(" category    : " + task.getCategory());
+				System.out.println(" priority    : " + task.getPriority());
+				String status = task.isComplete() ? "completed" : "pending";
+				System.out.println(" status      : " + status);
+				System.out.println("");
+				index++;
+			}
+		}
+
+		// action
+		System.out.println("**********************************************************");
+		System.out.println("Choose your action  **************************************");
+		System.out.println("1. Add New Task  2. Remove Task  3. Search Task  4. Exit  ");
+		System.out.println("**********************************************************");
+		System.out.print("Your action: ");
+	}
+
 	public static void performAction(int action, ToDoList list, Scanner scanner) {
 //		Scanner scanner = new Scanner(System.in);
 		switch (action) {
@@ -97,6 +137,8 @@ public class Main {
 			break;
 		case 3:
 			System.out.print("Please search :");
+			String search = scanner.next();
+			searchList(list.searchTasks(search));
 			break;
 		case 4:
 			System.out.println("");
