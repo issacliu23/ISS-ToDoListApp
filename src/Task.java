@@ -6,6 +6,10 @@ public class Task {
 	private String priority = null;
 	private boolean isComplete = false;
 
+	public Task() {
+		super();
+	}
+	
 	public Task(String description) {
 		super();
 		this.description = description;
