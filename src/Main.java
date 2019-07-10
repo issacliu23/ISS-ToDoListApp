@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,11 +9,10 @@ public class Main {
 		System.out.println("Welcome to WOW Todo List, please e to continue...");
 		String ePressed = input.next();
 		if (ePressed.equals("e") || ePressed.equals("E")) {
-			String userInp = "999";
+			int userInp = 999;
 			displayMenu(toDoList);
-			while (!userInp.equals("4")) {
-				performAction(input.nextInt(), toDoList);
-				userInp = input.next();
+			while (userInp != 4) {
+				performAction(input.nextInt(), toDoList, input);
 			}
 			System.out.println("Thank you!!");
 			input.close();
@@ -55,8 +56,8 @@ public class Main {
 		System.out.print("Your action: ");
 	}
 
-	public static void performAction(int action, ToDoList list) {
-		Scanner scanner = new Scanner(System.in);
+	public static void performAction(int action, ToDoList list, Scanner scanner) {
+//		Scanner scanner = new Scanner(System.in);
 		switch (action) {
 		case 1:
 			System.out.println("Title (Your task title): ");
@@ -76,20 +77,34 @@ public class Main {
 			task.setComplete(false);
 
 			list.addTask(task);
+			System.out.println("SUCCESSFULLY CREATED A TASK!");
 			displayMenu(list);
 			break;
 		case 2:
 			System.out.print("Please enter the task number (S/N) to remove:");
 			int index = scanner.nextInt();
-			list.removeTask(index);
+			Boolean deleted = list.removeTask(index);
+			if(deleted) {
+				System.out.println("");
+				System.out.println("SUCCESSFULLY DELETED A TASK!");
+				System.out.println("");
+			} else {
+				System.out.println("");
+				System.out.println("FAILED TO DELETE A TASK!");
+				System.out.println("");
+			}
+			displayMenu(list);
 			break;
 		case 3:
-
+			System.out.print("Please search :");
 			break;
 		case 4:
-
+			System.out.println("");
+			System.out.println("BYE BYE, SEE YOU AGAIN.");
+			System.exit(0);
 			break;
 		default:
+			System.out.println("");
 			System.out.println("INVALID ACTION, PLEASE CHOOSE AGAIN.");
 			System.out.println("");
 			displayMenu(list);
